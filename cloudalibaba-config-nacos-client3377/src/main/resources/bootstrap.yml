@@ -1,0 +1,22 @@
+server:
+  port: 3377
+
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #nacos服务注册中心地址
+      config:
+        server-addr: localhost:8848 #nacos作为配置中心的地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEV_GROUP
+        namespace: 024c6ab5-99b5-468a-af32-3a376d892a56
+
+#nacos的配置页面中，配置文件的Data ID所对应的是配置文件里的 ${prefix}-${spring.profile.active}.${file-extension}
+#prefix默认为spring.application.name的值，也可以通过配置spring.cloud.nacos.config.prefix来配置
+#spring.profile.active即为当前环境对应的profile，在这个模块里的application.yml中的值为dev，如果该项没有，那么Data ID将变为 ${prefix}.${file-extension}
+#file-extension为配置文件的数据格式，可以通过配置项spring.cloud.nacos.config.file-extension来配置
+#根据本模块的配置文件，Data ID为 nacos-config-client-dev.yaml
+
